@@ -1,37 +1,23 @@
-FROM centos:centos6
-MAINTAINER Mike Brannigan <mikejbrannigan@gmail.com>
+FROM debian:wheezy
+MAINTAINER Noah Hay <nhay@liveopscloud.com>
 
-# Update the stuff
-#RUN yum update -y --quiet
+ENV DEBIAN_FRONTEND noninteractive
 
-# Install EPEL
-RUN rpm -Uvh --quiet --force http://mirrors.kernel.org/fedora-epel/6/x86_64/epel-release-6-8.noarch.rpm
+COPY files/etc/apt/sources.list.d/ /etc/apt/sources.list.d/
 
-# Cassandra Repo
-COPY files/etc/yum.repos.d/datastax.repo /etc/yum.repos.d/datastax.repo
+RUN apt-key adv --keyserver pgp.mit.edu --recv-keys F758CE318D77295D && \
+apt-key adv --keyserver pgp.mit.edu --recv-keys 2B5C1B00 && \
+apt-key adv --keyserver pgp.mit.edu --recv-keys 0353B12C && \	
+apt-key adv --keyserver pgp.mit.edu --recv-keys EEA14886
 
-# Install wget
-RUN yum install -y --quiet wget
+RUN echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections
 
-# Install JVM
-WORKDIR /tmp
-RUN wget --quiet --no-check-certificate --no-cookies --header "Cookie: oraclelicense=accept-securebackup-cookie"  http://download.oracle.com/otn-pub/java/jdk/7u67-b01/jdk-7u67-linux-x64.rpm
-RUN rpm -Uvh --quiet jdk-7u67-linux-x64.rpm
+RUN apt-get update && apt-get -qq -y install cassandra oracle-java8-installer oracle-java8-set-default && apt-get clean && rm -rf /var/cache/apt
 
-# Install cassandra
-RUN yum install -y --quiet dsc20 cassandra=2.0.11
-
-# Copy /opt/cyanite
 COPY files/opt/cyanite/ /opt/cyanite/
 
-# Copy /etc/cyanite.yaml
 COPY files/etc/cyanite.yaml /etc/cyanite.yaml
 
-# Expose /var/log
-VOLUME ["/var/log"]
-
-# Ports 2003 and 8080
 EXPOSE 2003 8080
 
-# Run
 CMD [ "/opt/cyanite/cyanite.sh" ]
