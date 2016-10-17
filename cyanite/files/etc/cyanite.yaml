@@ -5,14 +5,15 @@ logging:
     - "/var/log/cyanite/cyanite.log"
 input:
   - type: "carbon"
+    host: 0.0.0.0
     port: 2003
 store:
   cluster: "us-east-1-dev-dse.cxengagelabs.net"
   keyspace: "metric"
 index:
-  type: "cluster"
-api:
-  port: 8080
+  type: "cassandra"
+  cluster: "us-east-1-dev-dse.cxengagelabs.net"
+  keyspace: "metric"
 engine:
   rules:
     default: [ "30s:1h" ]
