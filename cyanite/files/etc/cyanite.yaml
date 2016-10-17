@@ -1,20 +1,18 @@
-carbon:
-  host: "0.0.0.0"
-  port: 2003
-  rollups:
-    - "10s:14d"
-    - "1m:32d"
-    - "5m:90d"
-    - "1h:365d"
-http:
-  host: "0.0.0.0"
-  port: 8080
 logging:
   level: info
   console: true
   files:
-    - "/var/log/cyanite.log"
+    - "/var/log/cyanite/cyanite.log"
+input:
+  - type: "carbon"
+    port: 2003
 store:
-  cluster:
-    - "cass01"
-  keyspace: 'metric'
+  cluster: "us-east-1-dev-dse.cxengagelabs.net"
+  keyspace: "metric"
+index:
+  type: "cluster"
+api:
+  port: 8080
+engine:
+  rules:
+    default: [ "30s:1h" ]

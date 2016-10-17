@@ -6,4 +6,3 @@ cyanite:
     - http://cyanite01:8080
 finders:
   - cyanite.CyaniteFinder
-

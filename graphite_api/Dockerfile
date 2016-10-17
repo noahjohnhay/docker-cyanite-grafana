@@ -47,7 +47,7 @@ COPY files/etc/httpd/conf.d/graphite.conf /etc/httpd/conf.d/graphite.conf
 COPY files/var/www/wsgi-scripts/graphite-api.wsgi /var/www/wsgi-scripts/graphite-api.wsgi
 
 # Grafana
-ADD files/grafana-1.8.1.tar.gz /var/www
+ADD files/grafana-3.1.1.tar.gz /var/www
 
 # Grafana config
 COPY files/var/www/html/config.js /var/www/html/config.js

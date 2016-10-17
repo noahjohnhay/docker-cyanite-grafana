@@ -16,7 +16,7 @@ function (Settings) {
       },
       elasticsearch: {
         type: 'elasticsearch',
-        url: "http://localhost:9200",
+        url: "http://search-us-east-1-dev-es-ibwwu4vj4pja6v2icegb5tczui.us-east-1.es.amazonaws.com",
         index: 'grafana-dash',
         grafanaDB: true,
       }
