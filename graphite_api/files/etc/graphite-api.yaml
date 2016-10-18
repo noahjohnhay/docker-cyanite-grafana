@@ -1,6 +1,6 @@
 search_index: /srv/graphite/index
 allowed_origins:
-  - localhost:80
+  - *
 cyanite:
   urls:
     - http://cyanite:8080
