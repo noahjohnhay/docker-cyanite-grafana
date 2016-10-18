@@ -4,7 +4,7 @@ if [ -f /etc/default/cyanite ]; then
     . /etc/default/cyanite
 fi
 
-cat /opt/cyanite/schema.cql | cqlsh us-east-1-dev-dse.cxengagelabs.net
+cat /opt/cyanite/schema.cql | cqlsh $CASSANDRA
 
 JAR="/opt/cyanite/cyanite-0.5.1-standalone.jar"
 CONFIG="/etc/cyanite.yaml"

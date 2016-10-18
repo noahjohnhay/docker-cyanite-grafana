@@ -8,11 +8,11 @@ input:
     host: 0.0.0.0
     port: 2003
 store:
-  cluster: "us-east-1-dev-dse.cxengagelabs.net"
+  cluster: "$CASSANDRA"
   keyspace: "metric"
 index:
   type: "cassandra"
-  cluster: "us-east-1-dev-dse.cxengagelabs.net"
+  cluster: "$CASSANDRA"
   keyspace: "metric"
 api:
   port: 8080
