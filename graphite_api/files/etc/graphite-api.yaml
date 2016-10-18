@@ -1,6 +1,6 @@
 search_index: /srv/graphite/index
 allowed_origins:
-  - *
+  - dev-dashboards.cxengagelabs.net:8000
 cyanite:
   urls:
     - http://cyanite:8080

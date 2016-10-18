@@ -8,11 +8,11 @@ input:
     host: 0.0.0.0
     port: 2003
 store:
-  cluster: "$CASSANDRA"
+  cluster: "CASSANDRA_URL"
   keyspace: "metric"
 index:
   type: "cassandra"
-  cluster: "$CASSANDRA"
+  cluster: "CASSANDRA_URL"
   keyspace: "metric"
 api:
   port: 8080
