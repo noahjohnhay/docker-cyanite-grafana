@@ -17,6 +17,8 @@ RUN pip install --upgrade pip
 
 RUN pip install git+https://github.com/eliben/pycparser@release_v2.14
 
+RUN pip install cyanite
+
 RUN pip install gunicorn graphite-api[cyanite]
 
 EXPOSE 8000
