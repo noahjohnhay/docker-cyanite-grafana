@@ -1,18 +1,14 @@
 FROM debian:wheezy
+FROM 460140541257.dkr.ecr.us-east-1.amazonaws.com/java8
 MAINTAINER Noah Hay <nhay@liveopscloud.com>
 
 ENV DEBIAN_FRONTEND noninteractive
 
-COPY files/etc/apt/sources.list.d/ /etc/apt/sources.list.d/
+RUN echo "deb http://debian.datastax.com/community stable main" >> /etc/apt/sources.list
 
-RUN apt-key adv --keyserver pgp.mit.edu --recv-keys F758CE318D77295D && \
-apt-key adv --keyserver pgp.mit.edu --recv-keys 2B5C1B00 && \
-apt-key adv --keyserver pgp.mit.edu --recv-keys 0353B12C && \	
-apt-key adv --keyserver pgp.mit.edu --recv-keys EEA14886
+RUN wget http://debian.datastax.com/debian/repo_key && apt-key add repo_key && rm repo_key
 
-RUN echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections
-
-RUN apt-get update && apt-get -qq -y install cassandra oracle-java8-installer oracle-java8-set-default && apt-get clean && rm -rf /var/cache/apt
+RUN apt-get -y update && apt-get -y install cassandra=2.1.9 && apt-get -y clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 COPY files/opt/cyanite/ /opt/cyanite/
 
