@@ -1,9 +1,7 @@
 FROM ubuntu:14.04
 FROM 460140541257.dkr.ecr.us-east-1.amazonaws.com/java8
 FROM 460140541257.dkr.ecr.us-east-1.amazonaws.com/java8
-
 MAINTAINER Noah Hay <nhay@liveopscloud.com>
-
 ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get -y update
